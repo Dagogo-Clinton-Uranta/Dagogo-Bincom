@@ -16,6 +16,7 @@
   --clr-light: #fff;
   --clr-dark: #303030;
   --clr-accent: #16e0bd;
+  --clr-dark-adjacent: #444444;
 
   --fs-h1: 3rem;
   --fs-h2: 2.25rem;
@@ -309,7 +310,34 @@ header {
 .intro {
   position: relative;
 }
+/* Portfolio intro section */
+.inverse {
+  background: var(--clr-dark-adjacent);
+}
 
+.inverse h1 {
+  color: var(--clr-accent);
+}
+
+.inverse span {
+  color: var(--clr-light);
+}
+
+#enjoy-big {
+  color: var(--clr-accent);
+}
+
+@media (min-width: 880px) {
+  .enjoy-small {
+    display: none;
+  }
+}
+
+@media (max-width: 880px) {
+  #enjoy-big {
+    display: none;
+  }
+}
 .intro__img {
   box-shadow: var(--bs);
   min-width: 250px;
@@ -959,4 +987,4 @@ header {
   margin: 2rem auto 3rem auto;
   font-size: 1.75rem;
 }
-/*you need to sort out the  LEAVE A REQUEST form css for 600px and below*/
+/*you need to sort out the  LEAVE A REQUEST form css for 600px and below - I HAVE DONE THIS*/
