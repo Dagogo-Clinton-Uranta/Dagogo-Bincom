@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-/* Custom properties! you can update theese when you feel the design requires it*/
+/* Custom properties! you can update theese when you feel the design requires a change in theme*/
 
 :root {
   --ff-primary: 'Source Sans Pro', sans-serif;
@@ -81,7 +81,7 @@ body p {
 }
 /*  Buttons */
 .btn {
-  display: inline-block; /*  come and change this back to inline-block if you break anything */
+  display: inline-block;
   padding: 0.5em 2.5em;
   background: var(--clr-accent);
   color: var(--clr-dark);
@@ -121,7 +121,7 @@ body p {
   transform: scale(1.3);
 }
 
-/* Typography */
+/* Typing consistency */
 h1,
 h2,
 h3 {
@@ -181,7 +181,7 @@ header {
 .logo {
   width: 14rem;
 
-  /*maybe try some sass that increases width in proportion to the pixels*/
+  /*maybe try some SASS that increases width in proportion to the pixels*/
 }
 
 .nav {
