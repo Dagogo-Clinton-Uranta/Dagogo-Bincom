@@ -1,0 +1,217 @@
+@keyframes slideIn {
+  0% {
+    transform: skewX(-30deg) translateX(-150px);
+  }
+
+  100% {
+    transform: skewX(-30deg) translateX(600px);
+  }
+}
+
+@keyframes appear {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Bebas Neue', 'cursive';
+}
+
+body {
+  background-image: url('img/hexagon.jpg');
+  background-size: 2560px 1600px;
+  background-position: 25% 35%;
+}
+
+@media screen and (max-width: 1300px) {
+  body {
+    background-position: 40% 35%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    background-image: none;
+  }
+}
+
+section {
+  /*background-color: #dde1e7;*/
+
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*IT'S TIME TO CALCULATE SECTION BELOW*/
+.intro {
+  /*display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 60%;*/
+  margin-top: 60px;
+  margin-bottom: -100px;
+}
+
+.words {
+  font-size: 68px;
+  font-weight: 700;
+  color: #595959;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  /*letter-spacing: 0.15em;*/
+}
+@media screen and (max-width: 800px) {
+  .words {
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .words {
+    font-size: 38px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .words {
+    font-size: 32px;
+  }
+}
+.sfx {
+  animation: appear 2000ms steps(40, end);
+}
+/*IT'S TIME TO CALCULATE SECTION ABOVE*/
+
+.container {
+  width: 90%;
+  max-width: 400px;
+  background-color: #e5e5e5;
+  background-image: url('img/hexagon.jpg');
+  background-size: 2560px 1600px;
+  background-position: 45% 35%;
+
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: -8px -8px 14px #ffffff73, 12px 12px 20px rgba(30, 34, 39, 0.288);
+  padding: 40px 30px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    background-image: none;
+  }
+}
+
+.display {
+  background-color: rgb(211, 223, 223);
+  /*background-color: #e5e5e5;*/
+  height: 130px;
+  width: 100%;
+  text-align: right;
+  padding: 20px;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset -4px -4px 7px rgba(94, 104, 121, 0.288),
+    inset 6px 6px 10px rgba(94, 104, 121, 0.288);
+}
+
+.display::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100px;
+
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-30deg);
+  top: 0;
+  left: -150px;
+
+  animation: slideIn 800ms 2000ms;
+}
+
+/*.display::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-30deg);
+  top: 0;
+  left: 300px;
+}*/
+
+.display-1 {
+  opacity: 0.5;
+  font-size: 22px;
+  height: 20px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.display-2 {
+  margin-bottom: 10px;
+  color: #595959;
+}
+
+.temp-result {
+  position: absolute;
+  bottom: 0;
+  left: 30;
+  opacity: 0.2;
+  font-size: 22px;
+}
+
+.all-buttons {
+  color: rgb(182, 182, 182);
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  cursor: pointer;
+}
+.button {
+  height: 70px;
+  font-family: 'Train One', 'cursive';
+  font-size: 22px;
+  font-weight: 200;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  color: #595959;
+  box-shadow: -6px -6px 9px #ffffff73, 7px 7px 10.5px rgba(94, 104, 121, 0.288);
+}
+
+.button:hover {
+  color: rgb(0, 126, 255);
+  transform: scale(0.96);
+}
+
+.button:focus {
+  color: rgb(0, 126, 255);
+  transform: scale(0.8);
+  box-shadow: inset -4px -4px 7px #ffffff73,
+    inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+  /*try and make sure this box-shadow translates to the 
+  press of a button */
+}

@@ -1,140 +1,111 @@
-window.onload = function(){
-const navToggle = document.querySelector('.nav-toggle');
-const navlinks = document.querySelectorAll('.nav_link');
-const copiedEmail = document.getElementById('clippy');
-const copyAction = document.querySelector('.clipboard-icon');
-const navShift = document.querySelector('.hamburger');
+window.onload = function() {
+const display1El = document.querySelector('.display-1')
+const display2El = document.querySelector('.display-2')
+const tempResultEl = document.querySelector('.temp-result')
+const numbersEl =document.querySelectorAll('.number')
+const operationsEl = document.querySelectorAll('.operation')
+const equalEl = document.querySelector('.equal')
+const clearAllEl = document.querySelector('.all-clear')
+const clearLastEl = document.querySelector('.last-entity-clear')
 
-const formValidator = document.getElementById('form-validate');
-const nameField = document.getElementById('firstname');
-const emailField = document.getElementById('emailaddress');
-const websiteField = document.getElementById('website-description');
-const formSubmitter = document.getElementById('btn-variant');
-var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const fileTab = document.getElementById("filetab");
+let dis1Num = ''
+let dis2Num = ''
+let result = null
+let lastOperation = ''
+let haveDot = false
 
-
-
-//FUNCTION TO VALIDATE ALL FORM ENTRIES BEFORE SUBMISSION
-
-formValidator.addEventListener("submit",(e) =>{
-         
+numbersEl.forEach(number => {
    
-  
-     if(emailField.value === '' && nameField.value ==='' && websiteField.value == '' ){
-        nameField.placeholder = "Please enter a  valid name!"
-        emailField.placeholder = "Please enter a  valid email address!"
-        websiteField.placeholder = "Please give a description!"
-        e.preventDefault();
-        }
-
-        else if(emailField.value === '' && nameField.value ===''){
-        nameField.placeholder = "Please enter a  valid name!"
-        emailField.placeholder = "Please enter a  valid email address!"
-        window.history.back();
-        e.preventDefault();
-        }
-
-
-        else if(nameField.value ===''){
-       
-        nameField.placeholder = "Please enter a  valid name!"
-        e.preventDefault();
-        
-       }
+   number.addEventListener('mousedown', (e) => {
+    number.style.boxShadow= 'inset -4px -4px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, 0.288)';
+    number.style.transform='scale(0.8)'
+   })
    
-       else if(emailField.value === '' ){
-        
-        emailField.placeholder = "Please enter a  valid email address!"
-       
-        e.preventDefault();
+   number.addEventListener('mouseup', (e) => {
+    number.style.boxShadow= '';
+    number.style.transform='scale(1)'
+   }) 
+   
+    number.addEventListener('click', (e) => {
 
-       }
-
-       else if(websiteField.value == ''){
-        websiteField.placeholder = "Please give a description!"
-       
-        e.preventDefault();
-       }
-
-       else if(emailField.value.match(mailFormat) == null ){
-       emailField.value =''
-        emailField.placeholder = "Please enter a  valid email address!"
-       
-        e.preventDefault();
-       }
-       
-        else{
-            return;
+        if(e.target.innerText === '.' && !haveDot){
+          haveDot = true
         }
-      
-  
-});
-
-//FUNCTION TO CHANGE THE POSITION OF THE NAV BAR ON SCROLL
-
-document.addEventListener( "scroll", function shiftNavigation(){
-   if (window.pageYOffset <= 100){
-    navShift.style.left = "0vw" 
-   } 
-    else{
-        navShift.style.left = "9.2vw"
-        
-    }
-}
-) ;
-
-
-//FUNCTION TO BRING OUT THE NAVIGATION PAGE
-navToggle.addEventListener("click", () => {
-    document.body.classList.toggle('nav-open');
-}) ;
-
-//FUNCTION TO CLOSE THE NAVIGATION PAGE
-navlinks.forEach(link => {
-    link.addEventListener('click', () => {
-        document.body.classList.remove('nav-open')
+        else if(e.target.innerText === '.' && haveDot){
+          return;
+        }
+        dis2Num += e.target.innerText
+        display2El.innerText= dis2Num
     })
-});
-
-//FUNCTION TO COPY EMAIL ADDRESS
-copyAction.addEventListener( "click", () => {
-    copiedEmail.select()
-   copiedEmail.setSelectionRange(0,99999)
-    document.execCommand('copy');
-  
-   
- }
-) ;
-
-//FUNCTION TO SLIDE THE REQUEST FORM OPEN AND CLOSE
-fileTab.addEventListener("click", () => {
-   
-    if( fileTab.innerHTML === "CLICK HERE") {
-        document.body.classList.add('form-open')
-        document.body.classList.remove('form-close') 
-        fileTab.innerHTML = "CLOSE"
-    }
-    else if( fileTab.innerHTML === "CLOSE") { 
-        document.body.classList.remove('form-open')
-        document.body.classList.add('form-close')
-        fileTab.innerHTML = "CLICK HERE"}
-       
-       
-
 })
 
+ operationsEl.forEach(operation => {
+       operation.addEventListener('click',(e) => {
+           if(!dis2Num){return}
 
+           haveDot = false
 
+           const operationName = e.target.innerText
+           
+           if(dis1Num && dis2Num && lastOperation){
+             mathOperation()
+           }
+           else{
+             result=parseFloat(dis2Num)
+           }
+           clearVar(operationName)
+           lastOperation =operationName
+           console.log(result)
+       })
+ })
 
+ function clearVar(name =''){
+   dis1Num += dis2Num + ' ' + name + ' '
+   display1El.innerText =dis1Num
+   display2El.innerText=''
+   dis2Num = ''
+   tempResultEl.innerText= result
+ }
 
+  function mathOperation(){
+   if(lastOperation === 'x')
+   { result = parseFloat(result) * parseFloat(dis2Num)}
+   else if (lastOperation === '-')
+   { result = parseFloat(result) - parseFloat(dis2Num)}
+   else if (lastOperation === '+')
+   { result = parseFloat(result) + parseFloat(dis2Num)}
+   else if (lastOperation === '/')
+   { result = parseFloat(result) / parseFloat(dis2Num)}
+   else if (lastOperation === '%')
+   { result = parseFloat(result) % parseFloat(dis2Num)}
+  }
 
+  equalEl.addEventListener('click', (e) => {
+     if (!dis1Num||!dis2Num){return}
+     else{
+       haveDot =false;
+       mathOperation()
+       clearVar()
+       display2El.innerText = result
+       tempResultEl.innerText=''
+       dis2Num = result
+       dis1Num =''
+     }
 
-};
+  })
 
+  clearAllEl.addEventListener('click', (e) => {
+    dis1Num = ''
+    dis2Num = ''
+    display1El.innerText ='0'
+    display2El.innerText ='0'
+    result=''
+    tempResultEl.innerText = '0'
+  })
 
-
-
-
-
-
+  clearLastEl.addEventListener('click', (e) => {
+    display2El.innerText =''
+    dis2Num = '' 
+   
+  })
+}
